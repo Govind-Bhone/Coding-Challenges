@@ -68,3 +68,70 @@ glob prok Gold is 57800 Credits
 glob prok Iron is 782 Credits
 
 I have no idea what you are talking about
+
+##Execution steps-:
+
+1. Execution using scala eclipse 2.10.3
+
+1.  import the scala project Merchant-Guide-to-the-Galaxy by right clicking in package explorer and clicking on import tab
+
+2. Once project get imported you will find below folder/files structure. Package example.merchant.galaxy.logic contain all logic 
+
+information and example.merchant.galaxy.main contain main application file to run the application . this application when run without 
+
+program argument then it will pick up the default input.txt file present in src/main/resources and when we pass some customize file as 
+
+argument to the program it will read that custom file and display the output .
+
+We can provide the custom program argument as follows.
+
+3. we can run the application by right clicking on Main.scala and clicking on Run as => scala application as follows
+
+4. We can see the output in console as follows
+
+pish tegj glob glob is 42.0
+
+glob prok is 68.0 Credits
+
+glob prok is 57800.0 Credits
+
+glob prok is 782.0 Credits
+
+I have no idea what you are talking about
+
+2. Execution using SBT as Command Line tool
+
+Prerequisites:
+
+* Download and install SBT
+
+http://www.scala-sbt.org/download.html
+
+* After installation check weather sbt command is working or not
+
+$ sbt
+
+* Go to the project HOME directory which contain build.sbt file
+
+$cd <DIR>/Merchant-Guide-to-the-Galaxy
+
+* And run the command sbt run from the same folder
+
+$sbt run
+
+
+Note : Above command might download the scala library using below resolvers if not present on local system(require internet connection)
+
+resolvers ++= Seq(
+
+"Typesafe Snapshots" at "http://repo.typesafe.com/typesafe/snapshots",
+
+"Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases",
+
+"Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/",
+
+"Scala-Tools Snapshots" at "http://scala-tools.org/repo-snapshots",
+
+"Scala Tools Releases" at "http://scala-tools.org/repo-releases"
+
+)
