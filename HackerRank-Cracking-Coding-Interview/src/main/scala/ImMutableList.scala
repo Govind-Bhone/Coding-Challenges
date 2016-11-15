@@ -115,10 +115,14 @@ abstract class NewList[+A] {
     val op = other match {
       case NewListNil => this.asInstanceOf[NewList[A]]
       case NewListImpl(ele, NewListNil) => ele :: this
-      case NewListImpl(ele, p@_) => this.::(ele) ++ p
+      case NewListImpl(ele, p@_) => this.::(ele) ++ p //NewListImpl(this.head, this.tail ++ other).asInstanceOf[NewList[A]]
     }
     op.reverse
   }
+
+  def update[B >: A](t: B, i: Int): NewList[B] =
+    if (i == 0) NewListImpl(t, this.tail)
+    else NewListImpl(head, tail.update(t, i - 1))
 }
 
 case class NewListImpl[A](val head: A, val tail: NewList[A]) extends NewList[A] {
@@ -153,7 +157,7 @@ object NewList {
 
 object MyList extends App {
   val list = NewList(4, 2, 4, 6, 45, 34, 234)
-  println(list.reverse)
+  println(list)
   println(list.map(x => x + 2))
   println(list.drop(3))
   println(list.dropWhile(x => x % 2 == 0))
@@ -165,6 +169,7 @@ object MyList extends App {
   list.foreach(x => println(x + 2))
   println(list.take(3))
   println(list.takeWhile(x => x % 2 == 0))
+  println(list.update(10000, 0))
 
 
 }
