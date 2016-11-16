@@ -4,13 +4,9 @@
 
 abstract class NewList[+A] {
   def head: A
-
   def tail: NewList[A]
-
   def isEmpty: Boolean
-
   def length: Int
-
   def ::[B >: A, A](item: A): NewList[A] = NewListImpl[A](item, this.asInstanceOf[NewList[A]])
 
   def reverse: NewList[A] = {
@@ -127,21 +123,15 @@ abstract class NewList[+A] {
 
 case class NewListImpl[A](val head: A, val tail: NewList[A]) extends NewList[A] {
   def isEmpty = false
-
   def length: Int = 1 + tail.length
-
   override def toString: String = head + " " + tail
 }
 
 case object NewListNil extends NewList[Nothing] {
   def head: Nothing = throw new Exception("head of empty list")
-
   def tail: NewList[Nothing] = throw new Exception("tail of empty list")
-
   def isEmpty = true
-
   def length = 0
-
   override def toString = ""
 }
 

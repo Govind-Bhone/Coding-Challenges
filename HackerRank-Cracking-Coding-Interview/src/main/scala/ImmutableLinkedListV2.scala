@@ -4,43 +4,29 @@
 
 trait List[+T] {
   def isEmpty: Boolean
-
   type U <: T
-
   def head: T
-
   def tail: List[T]
-
   def length: Int
-
   def drop(n: Int): List[T]
-
   def map[U](f: T => U): List[U]
 }
 
 case object Nil extends List[Nothing] {
   override def isEmpty = true
-
   def head: Nothing =
     throw new NoSuchElementException("head of empty list")
-
   def tail: List[Nothing] =
     throw new NoSuchElementException("tail of empty list")
-
   def length: Int = 0
-
   def drop(n: Int): List[Nothing] = this
-
   def map[U](f: Nothing => U): List[U] = this
 }
 
 final case class ::[T](private val hd: T, private val tl: List[T]) extends List[T] {
   def head = hd
-
   def tail = tl
-
   override def isEmpty: Boolean = false
-
   def length = if (isEmpty) 0 else 1 + tail.length
 
   def drop(n: Int): List[T] =

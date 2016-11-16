@@ -34,9 +34,7 @@ trait NewStack {
   }
 
   def head: Int
-
   def size: Int
-
   def tail: NewStack
 }
 
@@ -57,13 +55,9 @@ case class NewStackImpl(val head: Int, val tail: NewStack) extends NewStack {
 
 case object NewStackNil extends NewStack {
   def head: Nothing = throw new Exception("Empty Stack")
-
   def tail: NewStack = throw new Exception("Empty Stack")
-
   def isEmpty = true
-
   def size = sizeState
-
   override def toString = ""
 }
 

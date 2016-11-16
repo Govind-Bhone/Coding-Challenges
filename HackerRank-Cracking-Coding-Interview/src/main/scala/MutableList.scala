@@ -3,15 +3,10 @@
   */
 abstract class MutableList {
   def head: Int
-
   var mutableState: MutableList = this
-
   def tail: MutableList
-
   def isEmpty: Boolean
-
   def length: Int
-
   def ::(item: Int): MutableList = MutableListImpl(item, this)
 
   def reverse: MutableList = {
@@ -104,7 +99,6 @@ abstract class MutableList {
 
 case class MutableListImpl(val head: Int, val tail: MutableList) extends MutableList {
   def isEmpty = false
-
   def length: Int = 1 + tail.length
 
   override def toString: String = {
@@ -120,13 +114,9 @@ case class MutableListImpl(val head: Int, val tail: MutableList) extends Mutable
 
 case object MutableListNil extends MutableList {
   def head: Nothing = throw new Exception("head of empty list")
-
   def tail: MutableList = throw new Exception("tail of empty list")
-
   def isEmpty = true
-
   def length = 0
-
   override def toString = ""
 }
 
