@@ -53,12 +53,12 @@ final case class ::[T](private val hd: T, private val tl: List[T]) extends List[
     else ::(f(head), tail.map(f))
 }
 
-object LinkedList extends App {
-  var list:List[Int] = ::[Int](10, ::(20,Nil))
+object LinkedListTest extends App {
+  var list: List[Int] = ::[Int](10, ::(20, Nil))
   println(list.head)
   println(list.isEmpty)
   println(list.length)
-  list=list.map(x => x + 2)
+  list = list.map(x => x + 2)
   println(list.drop(1))
 
 }

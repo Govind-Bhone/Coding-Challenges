@@ -154,7 +154,6 @@ object NewList {
   }
 }
 
-
 object MyList extends App {
   val list = NewList(4, 2, 4, 6, 45, 34, 234)
   println(list)
@@ -170,6 +169,4 @@ object MyList extends App {
   println(list.take(3))
   println(list.takeWhile(x => x % 2 == 0))
   println(list.update(10000, 0))
-
-
 }
