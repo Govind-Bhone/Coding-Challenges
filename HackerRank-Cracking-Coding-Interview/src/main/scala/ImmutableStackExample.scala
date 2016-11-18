@@ -37,6 +37,8 @@ object ImmutableStackExample extends App{
   println(stack.tail)
   stack=stack.cons(34)
   println(stack)
+  stack=stack.tail
+  println(stack)
   stack=stack.++(Cons(45,Cons(56,Empty)))
   println(stack.toList)
 }
