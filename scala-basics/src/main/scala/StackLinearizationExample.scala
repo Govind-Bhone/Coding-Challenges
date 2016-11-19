@@ -11,6 +11,7 @@ object StackLinearizationExample extends App {
   //  D -> SixLegged -> TwoLegged -> FourLegged -> Base -> AnyRef -> Any
 
 
+
   trait WithLegs {
     def legs: String = {
       println("Class Base")
