@@ -54,12 +54,14 @@ object AbstractTypesVsTypeParameterization extends App {
   abstract class IntSeqTypedBuffer[U, +T <: Seq[U]] extends SeqTypedBuffer[U,T]{
     override def toString="["+element.mkString(",")+"]"
   }
-
   val intTypedBuffer = new IntSeqTypedBuffer[Int,List[Int]] {
     override val element= List(1, 2, 3, 4, 5)
   }
-  println(intBuffer)
-  println(intBuffer.length)
-  println(intBuffer.head)
-  println(intBuffer.tail)
+
+  println(intTypedBuffer)
+  println(intTypedBuffer.length)
+  println(intTypedBuffer.head)
+  println(intTypedBuffer.tail)
+
+
 }
