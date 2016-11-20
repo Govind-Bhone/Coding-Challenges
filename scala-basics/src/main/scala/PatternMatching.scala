@@ -72,5 +72,26 @@ object PatternMatching extends App{
 
   }
 
+  //===================Pattern as Value variable
+
+  case class Player(name: String, score: Int)
+
+  def printMessage(player: Player) = player match {
+    case Player(_, score) if score > 100000 => println("Get a job, dude!")
+    case Player(name, _) => println("Hey " + name + ", nice to see you again!")
+  }
+
+  //Convert above routine into less side effect
+
+  def message(player: Player) = player match {
+    case Player(_, score) if score > 100000 => "Get a job, dude!"
+    case Player(name, _) => "Hey " + name + ", nice to see you again!"
+  }
+  def printMessage1(player: Player) = println(message(player))
+
+  def currentPlayer(): Player = Player("Daniel", 3500)
+  val player = currentPlayer()
+
+  val Player(name, _) = currentPlayer()
 
 }
