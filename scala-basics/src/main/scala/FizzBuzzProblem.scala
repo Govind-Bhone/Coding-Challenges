@@ -36,4 +36,15 @@ object FizzBuzzProblem extends App{
     case _ => "" + x
   }
 
+  def f(divisor: Int, result: Int => String): PartialFunction[Int, String] = {
+    case i if (i % divisor == 0) => result(i)
+  }
+  val f3  = f(3,  _ => "Fizz")
+  val f5  = f(5,  _ => "Buzz")
+  val f15 = f(15, x => f3(x) + f5(x)) // DRY
+  val id  = f(1,  _.toString)
+
+  val fizzBuzz = f15 orElse f3 orElse f5 orElse id
+  (1 to 100).map(fizzBuzz andThen println)
+
 }
