@@ -84,7 +84,7 @@ object BTree {
 
   def heightOfTreeOneApproach[T](tree: BTree[T]): Int = {
     if (tree == EmptyBTree) {
-      return 0
+      return -1
     } else {
       return 1 +
         Math.max(heightOfTreeOneApproach(tree.left),
