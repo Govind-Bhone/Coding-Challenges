@@ -217,6 +217,19 @@ public class BinaryTree {
 
     }
 
+    static void levelOrderTraversal(Node root) {
+        //Write your code here
+        if (root == null) return;
+        java.util.Queue<Node> queue = new java.util.LinkedList<Node>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            Node node = queue.remove();
+            System.out.print(node.data + " ");
+            if (node.left != null) queue.add(node.left);
+            if (node.right != null) queue.add(node.right);
+        }
+    }
+
     boolean checkBST(Node root) {
         return checkBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
@@ -294,6 +307,8 @@ public class BinaryTree {
         tree.printPreOrderIterative(root);
         System.out.println();
         tree.printPostOrderIterative(root);
+        System.out.println();
+        tree.levelOrderTraversal(root);
         System.out.println();
         System.out.println(tree.checkBST(root));
         System.out.println();
