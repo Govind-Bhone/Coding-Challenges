@@ -29,22 +29,40 @@ object P02 extends App {
     ls.splitAt(n)._1.last
   }
 
-  println(lastNthBuiltin1(4,List(1, 2, 3, 4, 5)))
+  println(lastNthBuiltin1(4, List(1, 2, 3, 4, 5)))
+
+
+  def lastNthRecursiveNonBuildIn[A](n: Int, ls: List[A]): A = {
+    def loop[A](xs: List[A], n: Int) = {
+      ls match {
+        case Nil if n > 0 => throw new NoSuchElementException
+        case _ if n == 1 => ls.last
+        case _ => lastNthRecursiveNonBuildIn(n - 1, ls.init)
+      }
+    }
+    if (n <= 0) throw new IllegalArgumentException else loop(ls, n)
+  }
 
 
   // Here's one approach to a non-builtin solution.
   def lastNthRecursive[A](n: Int, ls: List[A]): A = {
-    def lastNthR(count: Int, resultList: List[A], curList: List[A]): A =
+    def lastNthR(count: Int, resultList: List[A], curList: List[A]): A = {
       curList match {
         case Nil if count > 0 => throw new NoSuchElementException
-        case Nil              => resultList.head
-        case _ :: tail        =>
+        case Nil => resultList.head
+        case _ :: tail =>
           lastNthR(count - 1,
             if (count > 0) resultList else resultList.tail,
             tail)
       }
+    }
+
+
     if (n <= 0) throw new IllegalArgumentException
     else lastNthR(n, ls, ls)
   }
+
+  println(lastNthRecursive(3, List(1, 2, 3, 4)))
+  println(lastNthRecursiveNonBuildIn(3, List(1, 2, 3, 4)))
 
 }
