@@ -318,5 +318,10 @@ public class BinaryTree {
         System.out.println();
         System.out.println(tree.heightOfBinaryTree(root));
         System.out.println(tree.isBalanced(root));
+  /*      String s = null;
+        System.out.println(s.toString());*/
+
+
+
     }
 }
