@@ -217,6 +217,19 @@ public class BinaryTree {
 
     }
 
+    static void levelOrderTraversal(Node root) {
+        //Write your code here
+        if (root == null) return;
+        java.util.Queue<Node> queue = new java.util.LinkedList<Node>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            Node node = queue.remove();
+            System.out.print(node.data + " ");
+            if (node.left != null) queue.add(node.left);
+            if (node.right != null) queue.add(node.right);
+        }
+    }
+
     boolean checkBST(Node root) {
         return checkBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
@@ -244,7 +257,7 @@ public class BinaryTree {
 
     public int heightOfBinaryTree(Node node) {
         if (node == null) {
-            return 0;
+            return -1;
         } else {
             return 1 +
                     Math.max(heightOfBinaryTree(node.left),
@@ -295,6 +308,8 @@ public class BinaryTree {
         System.out.println();
         tree.printPostOrderIterative(root);
         System.out.println();
+        tree.levelOrderTraversal(root);
+        System.out.println();
         System.out.println(tree.checkBST(root));
         System.out.println();
         tree.invertTree(root);
@@ -303,5 +318,10 @@ public class BinaryTree {
         System.out.println();
         System.out.println(tree.heightOfBinaryTree(root));
         System.out.println(tree.isBalanced(root));
+  /*      String s = null;
+        System.out.println(s.toString());*/
+
+
+
     }
 }
