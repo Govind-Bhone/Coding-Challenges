@@ -28,9 +28,12 @@ object P15 extends App {
     loop(xs)
   }
 
-  println(duplicateNtimes(3,List('a, 'b, 'c, 'c, 'd)))
-  println(duplicateNtimes1(3,List('a, 'b, 'c, 'c, 'd)))
-  println(duplicateNtimes2(3,List('a, 'b, 'c, 'c, 'd)))
+  def duplicateNtimes3[T](c : Int, ls: List[T]): List[T] =
+    ls.foldRight(List[T]()) {(elem, list) => List.make(c, elem) ::: list}
 
+  assert(duplicateNtimes(3,List('a, 'b, 'c, 'c, 'd))==List('a, 'a, 'a, 'b, 'b, 'b, 'c, 'c, 'c, 'c, 'c, 'c, 'd, 'd, 'd))
+  assert(duplicateNtimes1(3,List('a, 'b, 'c, 'c, 'd))==List('a, 'a, 'a, 'b, 'b, 'b, 'c, 'c, 'c, 'c, 'c, 'c, 'd, 'd, 'd))
+  assert(duplicateNtimes2(3,List('a, 'b, 'c, 'c, 'd))==List('a, 'a, 'a, 'b, 'b, 'b, 'c, 'c, 'c, 'c, 'c, 'c, 'd, 'd, 'd))
+  assert(duplicateNtimes3(3,List('a, 'b, 'c, 'c, 'd))==List('a, 'a, 'a, 'b, 'b, 'b, 'c, 'c, 'c, 'c, 'c, 'c, 'd, 'd, 'd))
 
 }

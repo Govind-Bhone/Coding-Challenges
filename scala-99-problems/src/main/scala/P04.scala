@@ -24,9 +24,9 @@ object P04 extends App{
 
   def length3[T](xs:List[T])=xs.foldLeft(0){(c,_)=>c+1}
 
-  println(length(List(1,2,3,4,5,6,7)))
-  println(length1(List(1,2,3,4,5,6,7)))
-  println(length2(List(1,2,3,4,5,6,7)))
-  println(length3(List(1,2,3,4,5,6,7)))
+  assert(length(List(1,2,3,4,5,6,7))==7)
+  assert(length1(List(1,2,3,4,5,6,7))==7)
+  assert(length2(List(1,2,3,4,5,6,7))==7)
+  assert(length3(List(1,2,3,4,5,6,7))==7)
 
 }

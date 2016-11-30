@@ -13,13 +13,13 @@ object P09 extends App {
 
   def packConsecutiveDuplicates[T](xs: List[T]): List[List[T]] = {
     xs match {
-      case Nil => List(List())
+      case Nil => /*List(List())*/Nil
       case xh1 :: tail =>
         val (packed, next) = xs span {
           _ == xs.head
         }
-        if (next == Nil) List(packed)
-        else packed :: packConsecutiveDuplicates(next)
+       /* if (next == Nil) List(packed)
+        else*/ packed :: packConsecutiveDuplicates(next)
     }
   }
 
@@ -35,7 +35,9 @@ object P09 extends App {
   }
 
 
-  println(packConsecutiveDuplicates(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)))
-  println(packConsecutiveDuplicates1(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)))
+  assert(packConsecutiveDuplicates(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))==List(List('a, 'a, 'a, 'a), List('b), List('c, 'c), List('a, 'a), List('d), List('e, 'e, 'e, 'e)))
+  assert(packConsecutiveDuplicates1(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))==List(List('a, 'a, 'a, 'a), List('b), List('c, 'c), List('a, 'a), List('d), List('e, 'e, 'e, 'e)))
+
+  assert(packConsecutiveDuplicates(List('a, 'a, 'a, 'a))==List(List('a, 'a, 'a, 'a)))
 
 }

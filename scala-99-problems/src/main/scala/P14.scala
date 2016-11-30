@@ -25,7 +25,7 @@ object P14 extends App {
     }
   }
 
-  println(duplicate(List('a, 'b, 'c, 'c, 'd)))
-  println(duplicate1(List('a, 'b, 'c, 'c, 'd)))
-  println(duplicate2(List('a, 'b, 'c, 'c, 'd)))
+  assert(duplicate(List('a, 'b, 'c, 'c, 'd))==List('a, 'a, 'b, 'b, 'c, 'c, 'c, 'c, 'd, 'd))
+  assert(duplicate1(List('a, 'b, 'c, 'c, 'd))==List('a, 'a, 'b, 'b, 'c, 'c, 'c, 'c, 'd, 'd))
+  assert(duplicate2(List('a, 'b, 'c, 'c, 'd))==List('a, 'a, 'b, 'b, 'c, 'c, 'c, 'c, 'd, 'd))
 }

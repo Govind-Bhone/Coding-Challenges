@@ -33,11 +33,12 @@ object P05 extends App {
 
   def reverse2[T](xs: List[T]): List[T]=xs.foldLeft(List[T]()){(acc,c)=>acc.::(c)}
 
-  //def reverse3[T](xs: List[T]): List[T]=xs.foldRight(List[T]()){(c,acc)=>acc.::(c)}
+ // def reverse3[T](xs: List[T]): List[T]=xs.foldRight(List[T]()){(c,acc)=>acc.::(c)}
 
-  println(reverse(List(1, 2, 3, 4, 5, 6)))
-  println(reverse1(List(1, 2, 3, 4, 5, 6)))
-  println(reverse2(List(1, 2, 3, 4, 5, 6)))
-  println(reverseTailRecursive(List(1, 2, 3, 4, 5, 6)))
-  println(reverseRecursive(List(1, 2, 3, 4, 5, 6)))
+  assert(reverse(List(1, 2, 3, 4, 5, 6))==List(6,5,4,3,2,1))
+  assert(reverse1(List(1, 2, 3, 4, 5, 6))==List(6,5,4,3,2,1))
+  assert(reverse2(List(1, 2, 3, 4, 5, 6))==List(6,5,4,3,2,1))
+  assert(reverseTailRecursive(List(1, 2, 3, 4, 5, 6))==List(6,5,4,3,2,1))
+  assert(reverseRecursive(List(1, 2, 3, 4, 5, 6))==List(6,5,4,3,2,1))
+ // assert(reverse3(List(1, 2, 3, 4, 5, 6)))
 }

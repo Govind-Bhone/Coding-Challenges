@@ -11,7 +11,7 @@ object P02 extends App {
     }
   }
 
-  println(lastButOne(List(1, 2, 3, 4, 5)))
+  assert(lastButOne(List(1, 2, 3, 4, 5))==4)
 
   def lastButOneBuiltin[A](ls: List[A]): A =
     if (ls.isEmpty) throw new NoSuchElementException
@@ -29,7 +29,7 @@ object P02 extends App {
     ls.splitAt(n)._1.last
   }
 
-  println(lastNthBuiltin1(4, List(1, 2, 3, 4, 5)))
+  assert(lastNthBuiltin1(4, List(1, 2, 3, 4, 5))==4)
 
 
   def lastNthRecursiveNonBuildIn[A](n: Int, ls: List[A]): A = {
@@ -62,7 +62,7 @@ object P02 extends App {
     else lastNthR(n, ls, ls)
   }
 
-  println(lastNthRecursive(3, List(1, 2, 3, 4)))
-  println(lastNthRecursiveNonBuildIn(3, List(1, 2, 3, 4)))
+  assert(lastNthRecursive(3, List(1, 2, 3, 4))==2)
+  assert(lastNthRecursiveNonBuildIn(3, List(1, 2, 3, 4))==2)
 
 }

@@ -33,8 +33,8 @@ object P01 extends App {
   def last7[T](xs: List[T]) = xs.takeRight(1)
 
 
-  println(last(List(1, 2, 3, 4, 5)))
-  println(last1(List(1, 2, 3, 4, 5)))
-  println(last2(List(1, 2, 3, 4, 5)))
-  println(last3(List(1, 2, 3, 4, 5)))
+  assert(last(List(1, 2, 3, 4, 5))==5)
+  assert(last1(List(1, 2, 3, 4, 5))==5)
+  assert(last2(List(1, 2, 3, 4, 5))==5)
+  assert(last3(List(1, 2, 3, 4, 5))==5)
 }

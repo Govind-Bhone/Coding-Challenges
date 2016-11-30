@@ -28,6 +28,6 @@ object P13 extends App {
   }
 
 
-  println(calcRunlengthEncoding(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)))
-  println(calcRunlengthEncoding1(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)))
+  assert(calcRunlengthEncoding(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))==List((4,'a), (1,'b), (2,'c), (2,'a), (1,'d), (4,'e)))
+  assert(calcRunlengthEncoding1(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))==List((4,'a), (1,'b), (2,'c), (2,'a), (1,'d), (4,'e)))
 }

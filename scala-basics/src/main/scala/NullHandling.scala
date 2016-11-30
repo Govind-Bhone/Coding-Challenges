@@ -2,7 +2,7 @@
   * Created by govind.bhone on 11/22/2016.
   */
 object NullHandling extends App{
-  //def ():Boolean =null
+  //def f():Boolean =null
  // above statement will give compilation error
   // as we can't assign null values to priimitive datatypes (AnyVal subtypes )
 

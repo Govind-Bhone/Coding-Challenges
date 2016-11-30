@@ -14,5 +14,5 @@ object P07 extends App {
     println("result is "+res);res
   }
 
-  println(flattenList(List(11, List(List(20),1, 2, 3), List(6, 7, 8, 9), 1, 10, List(10))))
+  assert(flattenList(List(11, List(List(20),1, 2, 3), List(6, 7, 8, 9), 1, 10, List(10)))==List(11,20,1,2,3,6,7,8,9,1,10,10))
 }

@@ -19,8 +19,8 @@ object P08 extends App {
     }
   }
 
-  println(removeConsecutiveDuplicates(List(1, 1, 1, 2, 2, 3, 4, 5)))
-  println(removeConsecutiveDuplicates(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)))
+  assert(removeConsecutiveDuplicates(List(1, 1, 1, 2, 2, 3, 4, 5))==List(1,2,3,4,5))
+  assert(removeConsecutiveDuplicates(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))==List('a,'b,'c,'a,'d,'e))
 
 
   //  recursive implementation using dropWhile fun .
@@ -29,8 +29,8 @@ object P08 extends App {
     case h :: tail => h :: compressRecursive(tail.dropWhile(_ == h))
   }
 
-  println(compressRecursive(List(1, 1, 1, 2, 2, 3, 4, 5)))
-  println(compressRecursive(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)))
+  assert(compressRecursive(List(1, 1, 1, 2, 2, 3, 4, 5))==List(1,2,3,4,5))
+  assert(compressRecursive(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))==List('a,'b,'c,'a,'d,'e))
 
   // Tail recursive.
   def compressTailRecursive[A](ls: List[A]): List[A] = {
@@ -41,8 +41,8 @@ object P08 extends App {
     compressR(Nil, ls)
   }
 
-  println(compressTailRecursive(List(1, 1, 1, 2, 2, 3, 4, 5)))
-  println(compressTailRecursive(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)))
+  assert(compressTailRecursive(List(1, 1, 1, 2, 2, 3, 4, 5))==List(1,2,3,4,5))
+  assert(compressTailRecursive(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))==List('a,'b,'c,'a,'d,'e))
 
   // Functional.
   def compressFunctionalRight[A](ls: List[A]): List[A] =
@@ -51,8 +51,8 @@ object P08 extends App {
       else acc
     }
 
-  println(compressFunctionalRight(List(1, 1, 1, 2, 2, 3, 4, 5)))
-  println(compressFunctionalRight(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)))
+  assert(compressFunctionalRight(List(1, 1, 1, 2, 2, 3, 4, 5))==List(1,2,3,4,5))
+  assert(compressFunctionalRight(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))==List('a,'b,'c,'a,'d,'e))
 
   def compressFunctionalLeft[A](ls: List[A]): List[A] =
     ls.foldLeft(List[A]()) { (acc,h) =>
@@ -60,8 +60,21 @@ object P08 extends App {
       else acc
     }.reverse
 
-  println(compressFunctionalLeft(List(1, 1, 1, 2, 2, 3, 4, 5)))
-  println(compressFunctionalLeft(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)))
 
+  assert(compressFunctionalLeft(List(1, 1, 1, 2, 2, 3, 4, 5))==List(1,2,3,4,5))
+  assert(compressFunctionalLeft(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))==List('a,'b,'c,'a,'d,'e))
+
+  // intuitive but not @tailrec
+  def compress[T](ls: List[T]): List[T] = {
+    ls match {
+      case Nil         => Nil
+      case a @ List(_) => a
+      case a :: b :: tail if (a == b) => compress (b :: tail)
+      case a :: tail => a :: compress (tail)
+    }
+  }
+
+  assert(compress(List(1, 1, 1, 2, 2, 3, 4, 5))==List(1,2,3,4,5))
+  assert(compress(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))==List('a,'b,'c,'a,'d,'e))
 
 }

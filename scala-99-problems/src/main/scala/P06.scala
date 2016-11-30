@@ -3,6 +3,7 @@
   */
 object P06 extends App {
 
+  // very efficient solution O(logn)
   def isPalindrom[T](xs: List[T]): Boolean = {
     val length = xs.length
 
@@ -14,8 +15,20 @@ object P06 extends App {
     true
   }
 
+  // complexity O(n * n)
+  def isPalindrom2[T](list: List[T]): Boolean = {
+    list match {
+      case Nil => true
+      case _ :: Nil => true
+      case _ if list.head == list.last => isPalindrom2(list.tail.init)
+      case _ => false
+    }
+  }
+
+
   def isPalindrom1[T](xs:List[T]):Boolean=xs.reverse==xs
 
-  println(isPalindrom(List(1,2,3,2,1)))
-  println(isPalindrom1(List(1,2,3,2,1)))
+  assert(isPalindrom(List(1,2,3,2,1))==true)
+  assert(isPalindrom2(List(1,2,3,2,1))==true)
+  assert(isPalindrom1(List(1,2,3,2,1))==true)
 }

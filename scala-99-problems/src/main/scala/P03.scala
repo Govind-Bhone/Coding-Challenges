@@ -30,10 +30,10 @@ object P03 extends App {
 
   def findKthElement5[A](n: Int, ls: List[A]): A =ls.take(n+1).last
 
-  println(findKthElement(2, List(1, 2, 3, 4, 5)))
-  println(findKthElement1(2, List(1, 2, 3, 4, 5)))
-  println(findKthElement2(2, List(1, 2, 3, 4, 5)))
-  println(findKthElement3(2, List(1, 2, 3, 4, 5)))
-  println(findKthElement4(2, List(1, 2, 3, 4, 5)))
-  println(findKthElement5(2, List(1, 2, 3, 4, 5)))
+  assert(findKthElement(2, List(1, 2, 3, 4, 5))==3)
+  assert(findKthElement1(2, List(1, 2, 3, 4, 5))==3)
+  assert(findKthElement2(2, List(1, 2, 3, 4, 5))==3)
+  assert(findKthElement3(2, List(1, 2, 3, 4, 5))==3)
+  assert(findKthElement4(2, List(1, 2, 3, 4, 5))==3)
+  assert(findKthElement5(2, List(1, 2, 3, 4, 5))==3)
 }
