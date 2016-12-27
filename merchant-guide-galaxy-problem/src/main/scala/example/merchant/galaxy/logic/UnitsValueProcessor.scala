@@ -4,54 +4,60 @@ import scala.collection.mutable.ListBuffer
 import scala.collection.mutable.HashMap
 
 trait UnitsValueProcessor extends Op {
+
+  private val EMPTY_PLACEHOLDER = "EMPTY"
+  private val REPEATED_ROMAN_COUNT_VALUE = 3
+  private val NON_REPEATED_ROMAN_COUNT_VALUE = 1
+  private val INITIAL_COUNT_VALUE = 0
+
   import IntergalacticTransactionProcessor._
+
+  private def updateTransactionUnit(unit: String) = transactionUnit = unit
+
+  private def reInitialize(): Unit = {
+    repeatedTokenCount.foreach(e => repeatedTokenCount.put(e._1, INITIAL_COUNT_VALUE))
+    nonreatableTokenCount.foreach(e => repeatedTokenCount.put(e._1, INITIAL_COUNT_VALUE))
+  }
 
   /* update the metal per unit value */
   def processNonCurrencyItems(line: String) {
     val `$`(tokens, metal, value, unit) = line
-    transactionUnit = unit
+    updateTransactionUnit(unit)
     metalDecimalValueMapper.put(metal, (value.toFloat) / getDecimalValue(tokens.split("""\s+""")))
   }
 
   /* used to calculate the decimal value of the token */
   def getDecimalValue(tokenarray: Array[String]): Int = {
-    var value = 0
-    val romans = ListBuffer[Int]()
-    for (i <- 0 until tokenarray.length) {
-      if (!tokenRomanValueMapper.contains(tokenarray(i))) {
-        System.out.println("Invalid input detected!")
-        System.exit(0)
+
+    def validateTokenCountRules(tokenMap: HashMap[String, Int], index: Int, boundaryValue: Int): Unit = {
+      val lastRomanValue = if (index != 0) tokenRomanValueMapper(tokenarray(index - 1)) else EMPTY_PLACEHOLDER
+      val romanValue = tokenRomanValueMapper(tokenarray(index))
+      if (!tokenRomanValueMapper.contains(tokenarray(index))) {
+        throw InvalidToken("Invalid token detected!")
       }
-      val lastromanValue = if (i != 0) tokenRomanValueMapper(tokenarray(i - 1)) else "NULL"
-      val romanValue = tokenRomanValueMapper(tokenarray(i))
-      if (repeatedTokenCount.contains(romanValue)) {
-        if (!lastromanValue.equals("NULL") && !lastromanValue.equals(romanValue))
-          repeatedTokenCount.put(romanValue, 0)
-        repeatedTokenCount.put(romanValue, repeatedTokenCount(romanValue) + 1)
-        if (repeatedTokenCount(romanValue) > 3) {
-          println(s"ERROR-${romanValue} Roman Digit Never be repeated more than 3 times")
-          System.exit(0)
+
+      if (tokenMap.contains(romanValue)) {
+        if (!lastRomanValue.equals(EMPTY_PLACEHOLDER) && !lastRomanValue.equals(romanValue))
+          tokenMap.put(romanValue, INITIAL_COUNT_VALUE)
+        tokenMap.put(romanValue, tokenMap(romanValue) + 1)
+        if (tokenMap(romanValue) > boundaryValue) {
+          throw RomanDigitRepeatedError(s"ERROR-${romanValue} Roman Digit Never be repeated more than ${boundaryValue} times")
         }
-      } else if (nonreatableTokenCount.contains(romanValue)) {
-        if (!lastromanValue.equals("NULL") && !lastromanValue.equals(romanValue))
-          nonreatableTokenCount.put(romanValue, 0)
-        nonreatableTokenCount.put(romanValue, nonreatableTokenCount(romanValue) + 1)
-        if (nonreatableTokenCount(romanValue) > 1) {
-          println(s"ERROR-${romanValue} Roman Digit Never be repeated")
-          System.exit(0)
-        }
-      } else {
-        println("Invalid roman value detected")
       }
-      romans.+=(RomanNumber(tokenRomanValueMapper(tokenarray(i))).decimalValue)
     }
-    repeatedTokenCount = HashMap("I" -> 0, "X" -> 0, "C" -> 0, "M" -> 0)
-    nonreatableTokenCount = HashMap("L" -> 0, "V" -> 0, "D" -> 0)
-    doSubstract(romans).foreach(f => value += f)
-    value
+
+    val romans = for {
+      index <- 0 until tokenarray.length
+    } yield {
+      validateTokenCountRules(repeatedTokenCount, index, REPEATED_ROMAN_COUNT_VALUE)
+      validateTokenCountRules(nonreatableTokenCount, index, NON_REPEATED_ROMAN_COUNT_VALUE)
+      RomanNumber(tokenRomanValueMapper(tokenarray(index))).decimalValue
+    }
+    reInitialize()
+    doSubstract(romans.toArray).reduce(_ + _)
   }
 
-  def doSubstract(numbers: ListBuffer[Int]) = {
+  private def doSubstract(numbers: Array[Int]) = {
     for (i <- 0 until numbers.length - 1) {
       if (numbers(i) < numbers(i + 1)) {
         numbers(i) = -numbers(i)
