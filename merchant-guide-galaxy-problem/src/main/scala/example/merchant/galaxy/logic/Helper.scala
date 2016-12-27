@@ -1,7 +1,5 @@
 package example.merchant.galaxy.logic
 
-import scala.util.Success
-
 /* trait which defines operation performed on input
  * 
  *  1. ProcessFile => read the file and lines from the file 
@@ -15,11 +13,11 @@ import scala.util.Success
  */
 
 trait Op {
-  def processFile(filePath: String)
+  def processFile(filePath: Option[String])
   def processTokenRomanValueAssignment(line: String)
   def processNonCurrencyItems(line: String)
-  def processHowManyQuestion(line: String):(String,Double)
-  def processHowMuchQuestion(line: String):(String,Double)
+  def processHowManyQuestion(line: String): (String, Double)
+  def processHowMuchQuestion(line: String): (String, Double)
   def getDecimalValue(tokenarray: Array[String]): Int
 }
 

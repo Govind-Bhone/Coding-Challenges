@@ -14,15 +14,15 @@ object IntergalacticTransactionProcessor {
   val `?` = "^how many ([a-zA-Z]\\w+) is ((?:\\w+ )+)([A-Z]\\w+) \\?$".r
   val `???` = "^how much is ((?:\\w+[^0-9] )+)\\?$".r
 
-  /*repeatedTokenCount - the tokens which can be repeated up to three consecutive times
+  /* repeatedTokenCount - the tokens which can be repeated up to three consecutive times
    * nonreatableTokenCount - Never repeated
    * tokenRomanValueMapper - token to roman value mapping {pish=X, tegj=L, prok=V, glob=I}
    * metalDecimalValueMapper - metal to per unit value mapping {Gold=14450.0, Iron=195.5, Silver=17.0}
    * transactionUnit - Unit used for transaction (Credits)
    */
  
-  var repeatedTokenCount = HashMap[String, Int]("I" -> 0, "X" -> 0, "C" -> 0, "M" -> 0)
-  var nonreatableTokenCount = HashMap[String, Int]("D" -> 0, "L" -> 0, "V" -> 0)
+  val repeatedTokenCount = HashMap[String, Int]("I" -> 0, "X" -> 0, "C" -> 0, "M" -> 0)
+  val nonreatableTokenCount = HashMap[String, Int]("D" -> 0, "L" -> 0, "V" -> 0)
   val tokenRomanValueMapper = new HashMap[String, String]()
   val metalDecimalValueMapper = new HashMap[String, Double]()
   var transactionUnit = ""
@@ -44,9 +44,7 @@ object IntergalacticTransactionProcessor {
     implicit def convert(value: Value) = value.asInstanceOf[Value]
   }
 
-  def apply1(filePath: String) = new IntergalacticTransactionProcessor(filePath)
+  def apply(filePath: Option[String]) = new IntergalacticTransactionProcessor(filePath)
 }
-class IntergalacticTransactionProcessor(override val filePath: String) extends TokenValueProcessor
-  with UnitsValueProcessor with QuestionProcessor with InputParser {
-
-}
+class IntergalacticTransactionProcessor(override val filePath: Option[String]) extends TokenValueProcessor
+  with UnitsValueProcessor with QuestionProcessor with InputParser

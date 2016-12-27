@@ -6,6 +6,8 @@ scalaVersion := "2.10.3"
 
 scalacOptions ++= Seq("-deprecation")
 
+libraryDependencies += "junit" % "junit" % "4.12"
+
 resolvers ++= Seq(
   "Typesafe Snapshots" at "http://repo.typesafe.com/typesafe/snapshots",
   "Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases",

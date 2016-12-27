@@ -1,6 +1,7 @@
 package example.merchant.galaxy.main
 
 import example.merchant.galaxy.logic.IntergalacticTransactionProcessor
+
 /*
  * this is the startup file for the Application
  * it accept the filePath as program argument from the console 
@@ -9,9 +10,7 @@ import example.merchant.galaxy.logic.IntergalacticTransactionProcessor
  */
 
 object Main extends App {
-  var filePath: String = null
-  if (args.length != 0)
-    filePath = args(0)
-  val processor = IntergalacticTransactionProcessor.apply1(filePath)
+  val filePath = if (args.length != 0) Some(args(0)) else None
+  val processor = IntergalacticTransactionProcessor(filePath)
   processor.processFile(filePath)
 }
