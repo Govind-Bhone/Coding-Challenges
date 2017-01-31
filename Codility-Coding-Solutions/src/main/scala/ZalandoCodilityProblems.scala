@@ -6,7 +6,11 @@ Zalando codility test Interview Questions
 
 
  */
-object Solution3 extends App {
+object ZalandoCodilityProblems extends App {
+  
+  /*
+  *******************************Lift Problem*****************************************
+  */
   def solution3(a: Array[Int], b: Array[Int], m: Int, x: Int, y: Int): Int = {
     // write your code in Scala 2.11
     var totalStops = 0
@@ -49,6 +53,10 @@ object Solution3 extends App {
 
     return totalStops
   }
+  
+  /*
+  ************************Zipping the two integer number digits *****************
+  */
 
   def solution2(a: Int, b: Int): Int = {
     // write your code in Scala 2.11
@@ -65,6 +73,10 @@ object Solution3 extends App {
       -1
     else result.toInt
   }
+  
+  /*
+  *****************Longest substring without Numbers **************************************
+  */
 
   def solution1(s: String): Int = {
     var maxLen = Int.MinValue
