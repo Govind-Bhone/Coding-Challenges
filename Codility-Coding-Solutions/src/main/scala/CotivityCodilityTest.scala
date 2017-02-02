@@ -66,7 +66,7 @@ object CotivityTest extends App {
     }
   }
 
-  println(solution("00-44  48 5555 8361"))
+/*  println(solution("00-44  48 5555 8361"))
 
   println(solution("0 - 22 1985--324"))
 
@@ -76,4 +76,6 @@ object CotivityTest extends App {
   println(solution("456 45 67 78 99"))
   println(solution("2 3 4 5 6 7 8 9 "))
   println(solution("234-- --- 56 --89 "))
+  println(solution("- 34567--56-89--"))
+  println(solution("234-1"))*/
 }
