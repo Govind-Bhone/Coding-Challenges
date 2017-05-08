@@ -1,0 +1,4 @@
+India,delhi,200
+India,UP,400
+USA,Cali,300
+USA,NewYork,400
