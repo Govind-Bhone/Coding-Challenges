@@ -22,6 +22,12 @@ object Main2 extends App {
 
   val list = List(12, 45, 11, 78)
   prime(list)
+  
+    //================ANOTHER APPROACH FOR USING FUNCTIONAL WAY
+  val res=(for{
+    l<-list
+  } yield if(!(2 to l-1).exists(l%_==0)) Some(l) else None).filter(_!=None).map(_.get)
+  println("Second way is :"+res)
 
   // ============FIBONACCI SERIES(1, 1, 2, 3, 5, 8) =================
   def fibonacci(n: Int) = {
