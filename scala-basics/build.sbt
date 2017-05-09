@@ -1,4 +1,4 @@
-name := "HackerRank-problems"
+name := "scala-basics"
 
 version := "0.1"
 

@@ -22,7 +22,7 @@ object P12 extends App {
     } ::: decodeRunLengthEncoding(tail)
   }
 
-  def decodeRunLengthEncoding2[T](xs: List[(Int, T)]): List[T] = xs.flatMap(t => List.make(t._1, t._2))
+  def decodeRunLengthEncoding2[T](xs: List[(Int, T)]): List[T] = xs.flatMap(t => List.fill(t._1)(t._2))
 
   def decodeRunLengthEncoding3[T](xs: List[(Int, T)]): List[T] = xs.flatMap(t => for (i <- 1 to t._1) yield t._2)
 

@@ -2,7 +2,7 @@ name := "Merchant's-Guide-to-the-Galaxy"
 
 version := "0.1"
 
-scalaVersion := "2.10.3"
+scalaVersion := "2.12.2"
 
 scalacOptions ++= Seq("-deprecation")
 
